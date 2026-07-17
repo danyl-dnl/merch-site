@@ -22,6 +22,7 @@ html, body, #root {
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none; /* Prevent pull-to-refresh on mobile */
 }
 
 body {
@@ -30,9 +31,14 @@ body {
   font-family: var(--font-body);
 }
 
-/* ── Scrollbar Hide ── */
+/* ── Global Scrollbar Hide (for mobile carousel) ── */
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; ms-overflow-style: none; }
+
+/* ── Scrollbar Hide Class ── */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
 /* ── Badge Animations ── */
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
