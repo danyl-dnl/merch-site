@@ -10,16 +10,6 @@ const MODELS = [
   "/assets/model/model6.webp",
 ];
 
-// Custom visual scale multipliers to compensate for AI generation bulkiness (head/shoulder proportions)
-const VISUAL_TWEAKS = [
-  { scale: 0.90, y: "3%" },   // model1 (White Tee - very bulky)
-  { scale: 0.88, y: "4%" },   // model2 (Tote/Black Tee - bulky)
-  { scale: 0.89, y: "3.5%" }, // model3 (White Hoodie - bulky)
-  { scale: 0.94, y: "1.5%" }, // model4 (Black Hoodie variant)
-  { scale: 1.00, y: "0%" },   // model5 (MED Hoodie - perfect baseline)
-  { scale: 0.95, y: "1%" },   // model6
-];
-
 // Subtle per-product accent for ambient glow
 const ACCENTS = [
   "rgba(111,184,255,0.18)",
@@ -401,37 +391,31 @@ export default function MobileScene() {
             bottom: "-2%",
             left: "50%",
             transform: "translateX(-50%)",
-            transformOrigin: "bottom center",
           }}
         />
 
         {/* Per-product crossfade model images */}
-        {MODELS.map((src, i) => {
-          const tweak = VISUAL_TWEAKS[i];
-          return (
-            <img
-              key={i}
-              src={src}
-              alt=""
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                height: "110%",
-                width: "auto",
-                objectFit: "contain",
-                bottom: "-2%",
-                left: "50%",
-                transformOrigin: "bottom center",
-                // Combine the centering translation with the custom scale and Y offset
-                transform: `translateX(-50%) translateY(${tweak.y}) scale(${activeIndex === i ? tweak.scale : tweak.scale * 0.97})`,
-                opacity: activeIndex === i ? 1 : 0,
-                transition:
-                  "opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
-                willChange: "opacity, transform",
-              }}
-            />
-          );
-        })}
+        {MODELS.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              height: "110%",
+              width: "auto",
+              objectFit: "contain",
+              bottom: "-2%",
+              left: "50%",
+              transform: `translateX(-50%) scale(${activeIndex === i ? 1 : 0.97})`,
+              opacity: activeIndex === i ? 1 : 0,
+              transition:
+                "opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
+              willChange: "opacity, transform",
+            }}
+          />
+        ))}
 
         {/* Active product pill */}
         <div
