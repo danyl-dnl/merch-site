@@ -1,12 +1,12 @@
 export default function Character3D({ height = "100%", activeIndex = null }) {
   // Pre-define all model images that correspond to the 6 products
   const models = [
-    "/assets/model/model1.png",
-    "/assets/model/model2.png",
-    "/assets/model/model3.png",
-    "/assets/model/model4.png",
-    "/assets/model/model5.png",
-    "/assets/model/model6.png",
+    "/assets/model/model1.webp",
+    "/assets/model/model2.webp",
+    "/assets/model/model3.webp",
+    "/assets/model/model4.webp",
+    "/assets/model/model5.webp",
+    "/assets/model/model6.webp",
   ];
 
   return (
@@ -24,7 +24,7 @@ export default function Character3D({ height = "100%", activeIndex = null }) {
     }}>
       {/* Default Base Model (visible when nothing is hovered) */}
       <img
-        src="/assets/mannequin-hoodie.png"
+        src="/assets/mannequin-hoodie.webp"
         alt="Default model"
         style={{
           height: "100%",

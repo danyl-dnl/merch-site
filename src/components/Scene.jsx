@@ -267,7 +267,7 @@ export default function Scene() {
         {/* Background EXCEL / Merch Typography */}
         <div style={wordmarkStyle}>
           <img
-            src="/assets/excelmerch.png"
+            src="/assets/excelmerch.webp"
             alt="Excel Merch"
             style={{ width: "100%", height: "auto" }}
           />
