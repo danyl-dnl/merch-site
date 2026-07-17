@@ -139,6 +139,11 @@ export default function Scene() {
   const [scale, setScale] = useState(1);
   const [carouselOffset, setCarouselOffset] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  useEffect(() => {
+    if (carouselOffset !== 0) setHasInteracted(true);
+  }, [carouselOffset]);
 
   // Drag interaction refs
   const dragStart = useRef(null);
@@ -375,6 +380,49 @@ export default function Scene() {
           </svg>
         </button>
 
+        {/* ── Interaction hint ─────────────────────────────────────────── */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "80px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 40,
+            opacity: hasInteracted ? 0 : 1,
+            transition: "opacity 0.6s ease",
+            pointerEvents: "none",
+          }}
+        >
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              padding: "6px 16px",
+              borderRadius: "20px",
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.06)",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+            }}
+          >
+            <span style={{ fontSize: "14px", animation: "swipeHint 1.4s ease-in-out infinite" }}>←</span>
+            <span
+              style={{
+                fontSize: "10px",
+                fontWeight: 600,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "rgba(160,174,196,0.6)",
+                fontFamily: "'Inter', sans-serif",
+              }}
+            >
+              Drag or scroll to explore
+            </span>
+            <span style={{ fontSize: "14px", animation: "swipeHint 1.4s ease-in-out infinite reverse" }}>→</span>
+          </div>
+        </div>
+
         {/* ── Dot Indicators ───────────────────────────────────────── */}
         <div style={{
           position: "absolute",
@@ -423,6 +471,13 @@ export default function Scene() {
         </div>
 
       </div>
+      {/* ── Inline animation keyframes ─────────────────────────────────── */}
+      <style>{`
+        @keyframes swipeHint {
+          0%, 100% { transform: translateX(0); opacity: 0.5; }
+          50% { transform: translateX(4px); opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
